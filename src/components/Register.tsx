@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Send, CheckCircle } from "lucide-react";
+import { useCourse } from '../context/CourseContext';
 
 const Register = () => {
+    const { courseType } = useCourse();
     const [isSent, setIsSent] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -87,6 +89,17 @@ const Register = () => {
                             />
                             <input type="hidden" name="redirect" value="false" />
 
+                            {/* Тип курса */}
+                            <input
+                                type="hidden"
+                                name="course_type"
+                                value={
+                                    courseType === 'developer' ? 'Курс для разработчиков' :
+                                    courseType === 'executive' ? 'Курс для предпринимателей' :
+                                    'Claude Code курс'
+                                }
+                            />
+
                             {/* Visible fields */}
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -137,6 +150,40 @@ const Register = () => {
                                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 outline-none"
                                     placeholder="Название компании"
                                 />
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                    Выберите тарифный план *
+                                </label>
+                                <select
+                                    name="pricing_plan"
+                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 outline-none bg-white"
+                                    required
+                                >
+                                    <option value="">Выберите план</option>
+                                    {courseType === 'developer' ? (
+                                        <>
+                                            <option value="Однодневный курс - 7,000 сом">Однодневный курс - 7,000 сом</option>
+                                            <option value="Индивидуальное участие - 19,990 сом">Индивидуальное участие - 19,990 сом</option>
+                                            <option value="Групповое участие - 17,990 сом/чел">Групповое участие - 17,990 сом/чел (от 3-х человек)</option>
+                                            <option value="Корпоративное обучение - Индивидуально">Корпоративное обучение - Индивидуально</option>
+                                        </>
+                                    ) : courseType === 'executive' ? (
+                                        <>
+                                            <option value="Однодневный курс - 7,000 сом">Однодневный курс - 7,000 сом</option>
+                                            <option value="Курс для предпринимателей - 24,990 сом">Курс для предпринимателей - 24,990 сом</option>
+                                            <option value="Для команды руководителей - 21,240 сом/чел">Для команды руководителей - 21,240 сом/чел (от 3-х человек)</option>
+                                            <option value="VIP формат - Премиум">VIP формат - Премиум</option>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <option value="Стандартный план">Стандартный план</option>
+                                            <option value="Групповое участие">Групповое участие</option>
+                                            <option value="Корпоративное обучение">Корпоративное обучение</option>
+                                        </>
+                                    )}
+                                </select>
                             </div>
 
                             <button
