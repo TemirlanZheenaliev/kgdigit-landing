@@ -18,6 +18,7 @@ const Pricing = lazy(() => import('./components/Pricing'));
 const Testimonials = lazy(() => import('./components/Testimonials'));
 const HowItWorks = lazy(() => import('./components/HowItWorks'));
 const Mentor = lazy(() => import('./components/Mentor'));
+const MasterclassBanner = lazy(() => import('./components/MasterclassBanner'));
 
 // Executive компоненты - lazy loaded
 const AudienceExecutive = lazy(() => import('./components/executive/AudienceExecutive'));
@@ -44,6 +45,7 @@ const AppContent = () => {
                 <Suspense fallback={<div className="min-h-screen" />}>
                     {courseType === 'developer' && (
                         <>
+                            <MasterclassBanner />
                             <Audience />
                             <Program />
                             <Mentor />
@@ -58,6 +60,7 @@ const AppContent = () => {
 
                     {courseType === 'executive' && (
                         <>
+                            <MasterclassBanner />
                             <AudienceExecutive />
                             <ProgramExecutive />
                             <Mentor/>
@@ -72,6 +75,7 @@ const AppContent = () => {
 
                     {courseType === 'claude-code' && (
                         <>
+                            <MasterclassBanner />
                             <AudienceClaudeCode />
                             <ProgramClaudeCode />
                             <Mentor />
